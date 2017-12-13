@@ -1,0 +1,11 @@
+---
+- hosts: devcrp
+  user: root
+  tasks:
+    - name: dev crp status
+      shell: supervisorctl status
+      register: result
+    - name: result output
+      debug: msg="{{ result.stdout_lines }}"
+    
+  
