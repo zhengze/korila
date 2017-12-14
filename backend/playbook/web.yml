@@ -1,9 +1,17 @@
----
 - hosts: devcrp
   user: root
   tasks:
     - name: dev crp status
       shell: supervisorctl status
+      register: result
+    - name: result output
+      debug: msg="{{ result.stdout_lines }}"
+
+- hosts: testlb 
+  user: root
+  tasks:
+    - name: test lb status
+      shell: service keepalived status
       register: result
     - name: result output
       debug: msg="{{ result.stdout_lines }}"
