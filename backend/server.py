@@ -15,7 +15,9 @@ api = Api(app)
 
 class monitor(Resource):
     def get(self):
-        CMD = "ansible -i {0}/playbook/hosts all -m shell -a 'supervisorctl status'".format(os.getcwd())
+        #CMD = "ansible -i {0}/inventory/hosts all -m shell -a 'supervisorctl status'".format(os.getcwd())
+        current_path = os.getcwd()
+        CMD = "ansible-playbook -i {0}/inventory/hosts {1}/playbook/web.yml".format(current_path, current_path)
         child = subprocess.Popen([CMD], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
         child.wait()
         
