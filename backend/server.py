@@ -2,11 +2,11 @@
 #coding:utf8
 
 
+import os
 from flask import Flask, request
 from flask_restful import Resource, Api
 import subprocess
 import logging
-import os
 import ansible
 
 app = Flask(__name__)
