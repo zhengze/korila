@@ -7,13 +7,54 @@
     - name: result output
       debug: msg="{{ result.stdout_lines }}"
 
-- hosts: testlb 
+
+- hosts: testlb
   user: root
   tasks:
-    - name: test lb status
+    - name: service keepalived status
       shell: service keepalived status
       register: result
     - name: result output
       debug: msg="{{ result.stdout_lines }}"
     
+- hosts: testapp
+  user: root
+  tasks:
+    - name: supervisorctl status
+      shell: supervisorctl status
+      register: result
+    - name: result output
+      debug: msg="{{ result.stdout_lines }}"
   
+- hosts: dashalb
+  user: root
+  tasks:
+    - name: service keepalived status
+      shell: service keepalived status
+      register: result
+    - name: result output
+      debug: msg="{{ result.stdout_lines }}"
+
+- hosts: dashaapp
+  user: root
+  tasks:
+    - name: supervisorctl status
+      shell: supervisorctl status
+      register: result
+    - name: result output
+      debug: msg="{{ result.stdout_lines }}"
+
+#- hosts: bastion-host
+#  controlmaster: auto
+#  tasks:
+#      register: result
+#
+#- hosts: daxing-crp
+#  proxycommand: ssh -W %h:%p bastion-host
+#  user: root
+#  tasks:
+#    - name: supervisorctl status
+#      shell: supervisorctl status
+#      register: result
+#    - name: result output
+#      debug: msg="{{ result.stdout_lines }}"

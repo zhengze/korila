@@ -1,12 +1,27 @@
-[dev-crp]
-172.28.32.32
+[devcrp]
+172.28.32.32 ansible_ssh_host=172.28.32.32 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=123.com ansible_sudo_pass=123.com ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
 
-devcrp ansible_ssh_host=172.28.32.32 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=123.com ansible_sudo_pass=123.com ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
-
-[test-lb]
-172.28.32.51
-172.28.32.53
-
-testlb ansible_ssh_host=172.28.32.51 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=123.com ansible_sudo_pass=123.com ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
+[testlb]
+172.28.32.51 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=123.com ansible_sudo_pass=123.com ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
+172.28.32.53 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=123.com ansible_sudo_pass=123.com ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
 
 
+[testapp]
+172.28.32.49 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=123.com ansible_sudo_pass=123.com ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
+172.28.32.50 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=123.com ansible_sudo_pass=123.com ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
+
+
+[dashalb]
+172.28.26.199 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=123.com ansible_sudo_pass=123.com ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
+172.28.26.200 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=123.com ansible_sudo_pass=123.com ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
+
+[dashaapp]
+172.28.26.212 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=123.com ansible_sudo_pass=123.com ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
+172.28.26.217 ansible_ssh_port=22 ansible_ssh_user=root ansible_ssh_pass=123.com ansible_sudo_pass=123.com ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
+
+[bastion-host]
+172.31.2.185 ansible_ssh_port=60022 ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
+
+[daxing-crp]
+172.28.26.132 ansible_ssh_port=22 ansible_ssh_user=root ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
+172.28.26.134 ansible_ssh_port=22 ansible_ssh_user=root ansible_sudo_exe=/usr/bin/sudo ansible_connection=ssh ansible_shell_type=sh ansible_python_interpreter=/usr/bin/python
