@@ -86,7 +86,7 @@ def dasha_app_status(cmd):
 
 @task
 def main(cmd):
-    cmd = get_command(cmd)
+    #cmd = get_command(cmd)
     execute(dev_crp_status, cmd)
     execute(test_lb_status, cmd)
     execute(test_app_status, cmd)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #coding: utf-8
 
-from fabric.api import run, env, roles, execute, hosts, task
+from fabric.api import run, env, roles, execute, hosts, task, local, put
 
 env.gateway = '600408@172.31.2.185:60022'
 
@@ -20,7 +20,7 @@ def get_command(command):
     
     commands = dict(supervisorctl_status_cmd = "supervisorctl status",
         keepalived_status_cmd = "systemctl status keepalived",
-        df_cmd = "df -h"
+        df_cmd = "df -h",
     )
     return commands.get(command)
 
@@ -28,5 +28,12 @@ def get_command(command):
 @roles("daxing_crp")
 def daxing_crp_status(cmd):
     cmd = get_command(cmd)
-    run(cmd)
+    #run(cmd)
+    local(cmd)
 
+
+@roles("daxing_crp")
+def daxing_crp_uploadfile():
+    put("monitor.py", "/root")
+    
+    
