@@ -7,19 +7,6 @@ import paramiko
 from fabric.api import run, env, roles, execute, hosts, task
 
 
-#IP="172.28.32.50"
-#PORT=22
-#USERNAME="root"
-#PASSWORD="123.com"
-#CMD="supervisorctl status"
-#
-#ssh = paramiko.SSHClient()
-#ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-#ssh.connect(IP, PORT, USERNAME, PASSWORD, timeout=5)
-#stdin, stdout, stderr = ssh.exec_command(CMD)
-#print stdout.readlines()
-#ssh.close()
-
 env.passwords = {
     'root@172.28.32.32:22': '123.com',
     'root@172.28.32.51:22': '123.com',

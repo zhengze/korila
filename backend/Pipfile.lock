@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "295e5900c7b3cfde4e1480b13e36f2e14cb2f2eca3f2a63670f27d1c5404340c"
+            "sha256": "2a5c37a7cb52f96ceac80415badb18911aea2e1ec3c7753f218b302e98b9e9d9"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -32,6 +32,12 @@
                 "sha256:654b7db3b120e23474e9a1e5e38d268c77e58a9e17d2cb595456c37309846494"
             ],
             "version": "==0.23.0"
+        },
+        "autoenv": {
+            "hashes": [
+                "sha256:1351828933a1a07b466b167b0985022e0aad37a145679e0336f9497ff9b84277"
+            ],
+            "version": "==1.0.0"
         },
         "bcrypt": {
             "hashes": [
@@ -190,10 +196,11 @@
         },
         "ipaddress": {
             "hashes": [
-                "sha256:200d8686011d470b5e4de207d803445deee427455cd0cb7c982b68cf82524f81"
+                "sha256:64b28eec5e78e7510698f6d4da08800a5c575caa4a286c93d651c5d3ff7b6794",
+                "sha256:b146c751ea45cad6188dd6cf2d9b757f6f4f8d6ffb96a023e6f2e26eea02a72c"
             ],
             "markers": "python_version < '3'",
-            "version": "==1.0.19"
+            "version": "==1.0.22"
         },
         "itsdangerous": {
             "hashes": [
