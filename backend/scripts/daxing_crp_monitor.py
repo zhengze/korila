@@ -2,13 +2,16 @@
 #coding: utf-8
 
 from fabric.api import run, env, roles, execute, hosts, task, local, put
+import base64
+
+password = base64.b64decode('MTIzLmNvbQ==')
 
 env.gateway = '600408@172.31.2.185:60022'
 
 env.passwords = {
     '600408@172.31.2.185:60022': 'syswin#2018',
-    'root@10.252.38.132:22': '123.com',
-    'root@10.252.38.134:22': '123.com',
+    'root@10.252.38.132:22': password,
+    'root@10.252.38.134:22': password,
 }
 
 env.roledefs = {

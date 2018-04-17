@@ -5,18 +5,21 @@
 from optparse import OptionParser 
 import paramiko
 from fabric.api import run, env, roles, execute, hosts, task
+import base64
+
+password = base64.b64decode('MTIzLmNvbQ==')
 
 
 env.passwords = {
-    'root@172.28.32.32:22': '123.com',
-    'root@172.28.32.51:22': '123.com',
-    'root@172.28.32.53:22': '123.com',
-    'root@172.28.32.49:22': '123.com',
-    'root@172.28.32.50:22': '123.com',
-    'root@172.28.26.199:22': '123.com',
-    'root@172.28.26.200:22': '123.com',
-    'root@172.28.26.217:22': '123.com',
-    'root@172.28.26.212:22': '123.com',
+    'root@172.28.32.32:22': password,
+    'root@172.28.32.51:22': password,
+    'root@172.28.32.53:22': password,
+    'root@172.28.32.49:22': password,
+    'root@172.28.32.50:22': password,
+    'root@172.28.26.199:22': password,
+    'root@172.28.26.200:22': password,
+    'root@172.28.26.217:22': password,
+    'root@172.28.26.212:22': password,
 } 
 
 env.roledefs = {   
