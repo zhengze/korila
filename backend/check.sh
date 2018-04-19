@@ -1,1 +1,1 @@
-ansible-playbook -i ./inventory/ ./playbook/web.yml --ask-vault-pass 
+ansible-playbook -i ./inventory/ ./playbook/web.yml --vault-password-file ./vault-password
