@@ -14,7 +14,7 @@ def update_uop():
         
     for path in paths:
         print
-        local("cd "+path+";git branch;git pull")
+        local("cd "+path+";git fetch origin;git reset --hard HEAD;git pull")
 
 
 def main():
