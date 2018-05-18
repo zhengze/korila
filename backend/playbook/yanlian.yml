@@ -1,0 +1,6 @@
+- hosts: yanlian-lb
+  user: root
+  tasks:
+    - name: yanlian lb status
+      service: name=keepalived state=started
+
