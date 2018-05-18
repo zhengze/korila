@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bd787e9f4f703a8b94a76865cca8cc0eec8957ef8c838febbdfec2c44a973ea3"
+            "sha256": "b1477d2f50614cf184c84dc1909cd7d54385747ae2eea8304a794e35b23db1ae"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -22,9 +22,9 @@
         },
         "ansible": {
             "hashes": [
-                "sha256:315f1580b20bbc2c2f1104f8b5e548c6b4cac943b88711639c5e0d4dfc4d7658"
+                "sha256:51f0c9411344741fb4f6dd8757e0fb6a52c4dcf53a1bfbbfee413e067e65001a"
             ],
-            "version": "==2.4.2.0"
+            "version": "==2.5.1"
         },
         "asn1crypto": {
             "hashes": [
@@ -107,7 +107,6 @@
                 "sha256:e7f5ad6b12f21b77d3a37d5c67260e464f4e9068eb0c0622f61d0e30390b31b6",
                 "sha256:f6799913eb510b682de971ddef062bbb4a200f190e55cae81c413bc1fd4733c1"
             ],
-            "markers": "platform_python_implementation != 'PyPy'",
             "version": "==1.11.2"
         },
         "chardet": {
