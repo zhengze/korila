@@ -2,25 +2,25 @@
 #coding: utf-8
 
 
-from optparse import OptionParser 
 import paramiko
 from fabric.api import run, env, roles, execute, hosts, task
-import base64
-
-password = base64.b64decode('MTIzLmNvbQ==')
 
 
-env.passwords = {
-    'root@172.28.32.32:22': password,
-    'root@172.28.32.51:22': password,
-    'root@172.28.32.53:22': password,
-    'root@172.28.32.49:22': password,
-    'root@172.28.32.50:22': password,
-    'root@172.28.26.199:22': password,
-    'root@172.28.26.200:22': password,
-    'root@172.28.26.217:22': password,
-    'root@172.28.26.212:22': password,
-} 
+#IP="172.28.32.50"
+#PORT=22
+#USERNAME="root"
+#PASSWORD="123.com"
+#CMD="supervisorctl status"
+#
+#ssh = paramiko.SSHClient()
+#ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+#ssh.connect(IP, PORT, USERNAME, PASSWORD, timeout=5)
+#stdin, stdout, stderr = ssh.exec_command(CMD)
+#print stdout.readlines()
+#ssh.close()
+
+supervisorctl_status_cmd = "supervisorctl status"
+keepalived_status_cmd = "systemctl status keepalived"
 
 env.roledefs = {   
     'dev_crp' : ['172.28.32.32'],  
@@ -30,67 +30,42 @@ env.roledefs = {
     'dasha_app': ["172.28.26.217", "172.28.26.212"],
 }  
   
-
-def get_command(command):
-    
-    commands = dict(supervisorctl_status_cmd = "supervisorctl status",
-        keepalived_status_cmd = "systemctl status keepalived",
-        df_cmd = "df -h"
-    )
-    return commands.get(command)
-
+env.passwords = {
+    'dev_crp': '123.com',
+    'test_lb': '123.com',
+    'test_app': '123.com',
+    'dasha_lb': '123.com',
+    'dasha_app': '123.com',
+} 
 
 @roles("dev_crp")
-@task
-def dev_crp_status(cmd):
-    cmd = get_command(cmd)
-    run(cmd)
+def dev_crp_status():
+    run(supervisorctl_status_cmd)
 
 @roles("test_lb")
-@task
-def test_lb_status(cmd):
+def test_lb_status():
     try:
-        cmd = get_command(cmd)
-        run(cmd)
+        run(keepalived_status_cmd)
     except Exception as e:
         print("error:", e)
 
 @roles("test_app")
-@task
-def test_app_status(cmd):
-    cmd = get_command(cmd)
-    run(cmd)
+def test_app_status():
+    run(supervisorctl_status_cmd)
 
 @roles("dasha_lb")
-@task
-def dasha_lb_status(cmd):
-    cmd = get_command(cmd)
-    run(cmd)
+def dasha_lb_status():
+    run(keepalived_status_cmd)
 
 @roles("dasha_app")
-@task
-def dasha_app_status(cmd):
-    cmd = get_command(cmd)
-    run(cmd)
+def dasha_app_status():
+    run(supervisorctl_status_cmd)
 
 
-@task
-def main(cmd):
-    #cmd = get_command(cmd)
-    execute(dev_crp_status, cmd)
-    execute(test_lb_status, cmd)
-    execute(test_app_status, cmd)
-    execute(dasha_lb_status, cmd)
-    execute(dasha_app_status, cmd)
+def main():
+    execute(dev_crp_status)
+    execute(test_lb_status)
+    execute(test_app_status)
+    execute(dasha_lb_status)
+    execute(dasha_app_status)
 
-
-if __name__ == "__main__":
-    parser = OptionParser() 
-    parser.add_option("-C", "--command", action="store_true", 
-       dest="command", 
-       default=False, 
-       help="get input command, supervisorctl_status_cmd, keepalived_status_cmd, df_cmd"
-    ) 
-    (options, args) = parser.parse_args()
-    command = get_command(args[0])
-    main(command)
