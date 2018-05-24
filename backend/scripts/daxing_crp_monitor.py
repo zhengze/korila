@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding: utf-8
+# coding: utf-8
 
 from fabric.api import run, env, roles, execute, hosts, task
 
@@ -15,9 +15,9 @@ env.passwords = {
     'daxing_crp': '123.com',
 }
 
-supervisorctl_status_cmd = "supervisorctl status"
+supervisorctl_status_cmd = "supervisorctl status crp"
+
 
 @roles("daxing_crp")
 def daxing_crp_status():
     run(supervisorctl_status_cmd)
-
