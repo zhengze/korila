@@ -2,7 +2,6 @@
 
 
 from fabric.api import run, env, roles, execute, local, cd, parallel, task
-import os
 
 env.executable = '/bin/bash'
 
@@ -17,18 +16,18 @@ def update_uop():
         uop_frontend_path = "/".join([root_path, "uop-frontend"])
         paths = [uop_backend_path, crp_backend_path, uop_frontend_path]
 
-        for path in paths:
-            print
+        def update(path):
             local(
                 "cd " +
                 path +
                 ";git fetch origin;git reset --hard HEAD;git pull")
+        map(update, paths)
 
 
+@task
 def main():
     execute(update_uop)
 
 
 if __name__ == "__main__":
-    cmd = "fab -f update_code.py main"
-    os.system(cmd)
+    main()
