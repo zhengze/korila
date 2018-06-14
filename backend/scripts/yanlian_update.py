@@ -12,9 +12,9 @@ from fabric.api import run, env, roles, execute, local, cd, task
 env.executable = '/bin/bash'
 
 env.roledefs = {
-    'yanlian_lb': {'hosts':['172.28.50.116', '172.28.50.117']},
-    'yanlian_uop': {'hosts':['172.28.50.125', '172.28.50.161']},
-    'yanlian_crp': {'hosts':['172.28.50.125', '172.28.50.161']}
+    'yanlian_lb': {'hosts': ['172.28.50.116', '172.28.50.117']},
+    'yanlian_uop': {'hosts': ['172.28.50.125', '172.28.50.161']},
+    'yanlian_crp': {'hosts': ['172.28.50.125', '172.28.50.161']}
 }
 
 env.users = {
@@ -28,9 +28,9 @@ env.passwords = {
     'yanlian_crp': '123456'
 }
 
-uop_frontend_update_cmd = "git pull;npm run build;nginx -t;nginx -s reload"
-uop_backend_update_cmd = "git pull;supervisorctl reload uop"
-crp_backend_update_cmd = "git pull;supervisorctl reload crp"
+uop_frontend_update_cmd = "git pull && npm run build && nginx -t && nginx -s reload"
+uop_backend_update_cmd = "git pull && supervisorctl reload uop"
+crp_backend_update_cmd = "git pull && supervisorctl reload crp"
 
 
 @task
