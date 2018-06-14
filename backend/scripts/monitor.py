@@ -4,8 +4,9 @@
 
 from fabric.api import run, env, roles, execute, hosts, task, parallel
 from fabric.colors import green
-from settings import userinfo
+from settings import UserInfo
 
+userinfo = UserInfo()
 
 
 supervisorctl_status_cmd = "supervisorctl status"
