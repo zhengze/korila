@@ -4,19 +4,10 @@ from dotenv import load_dotenv, find_dotenv
 
 class UserInfo(object):
     def __init__(self):
-        # load_dotenv(find_dotenv())
-        load_dotenv(dotenv_path="../.env")
-        pass
+        load_dotenv(find_dotenv())
 
-    @staticmethod
-    def get_user():
+    def get_user(self):
         return os.getenv("USER")
 
-    @staticmethod
-    def get_password():
+    def get_password(self):
         return os.getenv("PASSWORD")
-
-
-if __name__ == "__main__":
-    userinfo = UserInfo()
-    print userinfo.get_user()
