@@ -4,10 +4,9 @@
 
 from fabric.api import run, env, roles, execute, hosts, task, parallel
 from fabric.colors import green
-from settings import UserInfo
+from settings import userinfo
 
 
-userinfo = UserInfo()
 
 supervisorctl_status_cmd = "supervisorctl status"
 keepalived_status_cmd = "systemctl status keepalived"
@@ -48,6 +47,7 @@ def dev_crp_status():
 def test_lb_status():
     try:
         run(keepalived_status_cmd)
+        run(nginx_status_cmd)
     except Exception as e:
         print("error:", e)
 
@@ -62,6 +62,7 @@ def test_app_status():
 @roles("dasha_lb")
 def dasha_lb_status():
     run(keepalived_status_cmd)
+    run(nginx_status_cmd)
 
 
 @task
