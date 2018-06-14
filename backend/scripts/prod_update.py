@@ -26,7 +26,8 @@ env.passwords = {
     'dasha_crp': userinfo.get_password(),
 }
 
-uop_frontend_update_cmd = "git pull && npm run build;nginx -t && nginx -s reload"
+uop_frontend_update_cmd = "git pull && npm run build && nginx -t && \
+    nginx -s reload"
 uop_backend_update_cmd = "git pull && supervisorctl reload uop"
 crp_backend_update_cmd = "git pull && supervisorctl reload crp"
 
