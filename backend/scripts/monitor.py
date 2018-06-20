@@ -2,12 +2,11 @@
 # coding: utf-8
 
 
-from fabric.api import run, env, roles, execute, hosts, task, parallel
+from fabric.api import run, env, roles, execute, hosts, task, parallel, with_settings
 from fabric.colors import green
 from settings import UserInfo
 
 userinfo = UserInfo()
-
 
 supervisorctl_status_cmd = "supervisorctl status"
 keepalived_status_cmd = "systemctl status keepalived"
@@ -19,21 +18,21 @@ env.roledefs = {
     'test_app': ['172.28.32.49', '172.28.32.50'],
     'dasha_lb': ["172.28.26.199", "172.28.26.200"],
     'dasha_app': ["172.28.26.217", "172.28.26.212"],
+    'daxing_bastion_host': ["172.31.2.185"],
+    'daxing_crp': ['10.252.38.132', '10.252.38.134'],
 }
 
-env.users = {
-    'dev_crp': userinfo.get_user(),
-    'test_lb': userinfo.get_user(),
-    'test_app': userinfo.get_user(),
-    'dasha_lb': userinfo.get_user(),
-    'dasha_app': userinfo.get_user(),
-}
 env.passwords = {
-    'dev_crp': userinfo.get_password(),
-    'test_lb': userinfo.get_password(),
-    'test_app': userinfo.get_password(),
-    'dasha_lb': userinfo.get_password(),
-    'dasha_app': userinfo.get_password(),
+    'root@172.28.32.32:22': userinfo.get_password(),
+    'root@172.28.32.51:22': userinfo.get_password(),
+    'root@172.28.32.53:22': userinfo.get_password(),
+    'root@172.28.26.199:22': userinfo.get_password(),
+    'root@172.28.26.200:22': userinfo.get_password(),
+    'root@172.28.26.212:22': userinfo.get_password(),
+    'root@172.28.26.217:22': userinfo.get_password(),
+    '600408@172.31.2.185:60022': 'syswin#2018',
+    'root@10.252.38.132:22': userinfo.get_password(),
+    'root@10.252.38.134:22': userinfo.get_password(),
 }
 
 
@@ -69,6 +68,15 @@ def dasha_lb_status():
 @task
 @roles("dasha_app")
 def dasha_app_status():
+    run(supervisorctl_status_cmd)
+
+
+@task
+@roles("daxing_crp")
+@with_settings(
+  gateway="600408@172.31.2.185:60022"
+)
+def daxing_crp_status():
     run(supervisorctl_status_cmd)
 
 

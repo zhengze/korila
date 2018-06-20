@@ -17,15 +17,11 @@ env.roledefs = {
     'yanlian_crp': {'hosts': ['172.28.50.125', '172.28.50.161']}
 }
 
-env.users = {
-    'yanlian_lb': 'root',
-    'yanlian_uop': 'root',
-    'yanlian_crp': 'root'
-}
 env.passwords = {
-    'yanlian_lb': '123456',
-    'yanlian_uop': '123456',
-    'yanlian_crp': '123456'
+    'root@172.28.50.116:22': '123456',
+    'root@172.28.50.117:22': '123456',
+    'root@172.28.50.125:22': '123456',
+    'root@172.28.50.161:22': '123456',
 }
 
 uop_frontend_update_cmd = "git pull && npm run build && nginx -t && nginx -s reload"

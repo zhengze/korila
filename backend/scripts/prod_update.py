@@ -11,23 +11,22 @@ from settings import UserInfo
 
 userinfo = UserInfo()
 
-env.executable = '/bin/bash'
 
+env.executable = '/bin/bash'
 env.roledefs = {
     'dasha_lb': ['172.28.26.199', '172.28.26.200'],
     'dasha_uop': ['172.28.26.212', '172.28.26.217'],
     'dasha_crp': ['172.28.26.212', '172.28.26.217']
 }
 
-env.user = 'root'
 env.passwords = {
-    'dasha_lb': userinfo.get_password(),
-    'dasha_uop': userinfo.get_password(),
-    'dasha_crp': userinfo.get_password(),
+    'root@172.28.26.199:22': userinfo.get_password(),
+    'root@172.28.26.200:22': userinfo.get_password(),
+    'root@172.28.26.212:22': userinfo.get_password(),
+    'root@172.28.26.217:22': userinfo.get_password(),
 }
 
-uop_frontend_update_cmd = "git pull && npm run build && nginx -t && \
-    nginx -s reload"
+uop_frontend_update_cmd = "git pull && npm run build && nginx -t && nginx -s reload"
 uop_backend_update_cmd = "git pull && supervisorctl reload uop"
 crp_backend_update_cmd = "git pull && supervisorctl reload crp"
 
@@ -64,9 +63,9 @@ def update_crp_backend(
 
 @task
 def main():
-    execute(update_uop_frontend, uop_frontend_update_cmd)
-    execute(update_uop_backend, uop_backend_update_cmd)
-    execute(update_crp_backend, crp_backend_update_cmd)
+    execute(update_uop_frontend, cmd=uop_frontend_update_cmd)
+    execute(update_uop_backend, cmd=uop_backend_update_cmd)
+    execute(update_crp_backend, cmd=crp_backend_update_cmd)
 
 
 if __name__ == "__main__":
