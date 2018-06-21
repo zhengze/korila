@@ -16,7 +16,6 @@ env.roledefs = {
     'gaofang_uop': {'hosts': ['172.28.50.125', '172.28.50.161']},
     'gaofang_crp': {'hosts': ['172.28.50.125', '172.28.50.161']},
     # 'all_nodes': ['172.28.50.116', '172.28.50.117', '172.28.50.125', '172.28.50.161']
-    'all_nodes': ['172.28.50.116']
 }
 
 env.users = {
@@ -30,10 +29,6 @@ env.passwords = {
     'gaofang_uop': '123456',
     'gaofang_crp': '123456'
 }
-
-uop_frontend_update_cmd = "git pull && npm run build && nginx -t && nginx -s reload"
-uop_backend_update_cmd = "git pull && supervisorctl reload uop"
-crp_backend_update_cmd = "git pull && supervisorctl reload crp"
 
 
 @task
@@ -133,6 +128,45 @@ systemctl enable supervisord && \
 cp /opt/uop-backend/conf.d/prod/supervisord/src/uop.conf /etc/supervisord.d && \
 cp /opt/uop-backend/conf.d/prod/supervisord/src/crp.conf /etc/supervisord.d"
     run(cmd)
+
+
+@task
+@roles("gaofang_crp")
+def install_docker():
+    cmd = "yum install docker-io -y"
+    run(cmd)
+
+
+@task
+@roles("gaofang_lb")
+def build_uop_frontend(
+    code_path="/opt/uop-frontend"
+):
+    with cd(code_path):
+        cmd = "git checkout -b feature-fuzhou origin/feature-fuzhou && \
+npm install -g cnpm --registry=https://registry.npm.taobao.org && \
+cnpm install && cnpm run build"
+        run(cmd)
+
+
+@task
+@roles("yanlian_uop")
+def update_uop_backend(
+    code_path="/opt/uop-backend",
+):
+    with cd(code_path):
+        cmd = ""
+        run(cmd)
+
+
+@task
+@roles("yanlian_crp")
+def update_crp_backend(
+    code_path="/opt/crp-backend",
+):
+    with cd(code_path):
+        cmd = ""
+        run(cmd)
 
 
 @task

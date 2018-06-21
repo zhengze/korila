@@ -18,12 +18,13 @@ env.roledefs = {
     'test_app': ['172.28.32.49', '172.28.32.50'],
     'dasha_lb': ["172.28.26.199", "172.28.26.200"],
     'dasha_app': ["172.28.26.217", "172.28.26.212"],
-    'daxing_bastion_host': ["172.31.2.185"],
     'daxing_crp': ['10.252.38.132', '10.252.38.134'],
 }
 
 env.passwords = {
     'root@172.28.32.32:22': userinfo.get_password(),
+    'root@172.28.32.49:22': userinfo.get_password(),
+    'root@172.28.32.50:22': userinfo.get_password(),
     'root@172.28.32.51:22': userinfo.get_password(),
     'root@172.28.32.53:22': userinfo.get_password(),
     'root@172.28.26.199:22': userinfo.get_password(),
@@ -87,3 +88,4 @@ def main():
     execute(test_app_status)
     execute(dasha_lb_status)
     execute(dasha_app_status)
+    execute(daxing_crp_status)
